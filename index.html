@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1d6f5f"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'none'; worker-src 'self'; manifest-src 'self'; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://wel-be.goatcounter.com; connect-src https://wel-be.goatcounter.com; worker-src 'self'; manifest-src 'self'; form-action 'none'; base-uri 'none'">
 <title>家計簿 明細統合</title>
 <style>
 :root{color-scheme:light dark;--l:#8885;--a:#1d6f5f}
@@ -13,10 +13,11 @@ button,select,input{font:inherit;padding:2px 6px;max-width:100%}button{cursor:po
 @media(max-width:700px){body{padding:10px;font-size:15px}h1{font-size:18px}.g{flex-direction:column;gap:6px}.g label{display:flex;flex-direction:column;gap:2px}.g label:has(input[type=checkbox]){flex-direction:row;align-items:center}table{display:block;overflow-x:auto;white-space:nowrap}button,select,input{min-height:38px}input[type=checkbox]{min-height:0}}
 </style></head><body>
 <h1>家計簿 明細統合</h1>
-<p class="m">CSVはこのブラウザの中だけで処理され、外部には送信されません。データは保存しません（閉じると消えます）。</p>
+<p class="m">CSVの内容は、このブラウザの中だけで処理されます。データは保存しません（閉じると消えます）。アクセス数の集計のため、このページを開いたことが GoatCounter に送られます。アプリがCSVの内容を送信することはありません。</p>
 <h2>1. CSVを読み込む</h2>
 <input type="file" id="fi" accept=".csv,.txt,text/csv,text/plain,application/vnd.ms-excel" multiple>
 <div id="files"></div><div id="app"></div>
+<p class="m" style="text-align:center;margin:32px 0 8px"><a href="https://ofuse.me/f3a8ad6a" target="_blank" rel="noopener noreferrer">改善のアイディア・応援はこちら</a></p>
 <script>
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),Y=n=>Math.round(n).toLocaleString('ja-JP');
 let F=[],ED={},AP={},RJ={},CT={},LK={},MON='';
@@ -161,4 +162,6 @@ document.addEventListener('change',e=>{const t=e.target,d=t.dataset;
 $('#fi').addEventListener('change',async e=>{for(const file of e.target.files)addFile(file.name,await file.arrayBuffer());e.target.value='';render()});
 render();
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
-</script></body></html>
+</script>
+<script data-goatcounter="https://wel-be.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body></html>
